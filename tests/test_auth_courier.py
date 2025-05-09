@@ -7,7 +7,8 @@ from helpers import *
 
 
 class TestAuthCourier:
-    @allure.step('Авторизация курьера')
+
+    @allure.title('Авторизация курьера')
     def test_auth_courier(self, create_courier):
         login_pass = create_courier
         with allure.step('Отправка запроса на авторизацию'):
@@ -18,7 +19,7 @@ class TestAuthCourier:
         assert r.status_code == 200
         assert Message.LOGING_COURIER in r.text
 
-    @allure.step('Авторизация курьера без логина')
+    @allure.title('Авторизация курьера без логина')
     def test_auth_without_login(self, create_courier):
         login_pass = create_courier
         with allure.step('Отправка запроса на авторизацию без логина'):
@@ -29,7 +30,7 @@ class TestAuthCourier:
         assert r.status_code == 400
         assert Message.LOGING_COURIER_WITHOUT_DATA == r.text
 
-    @allure.step('Авторизация курьера без пароля')
+    @allure.title('Авторизация курьера без пароля')
     def test_auth_without_password(self, create_courier):
         login_pass = create_courier
         with allure.step('Отправка запроса на авторизацию без пароля'):
@@ -40,7 +41,7 @@ class TestAuthCourier:
         assert r.status_code == 400
         assert Message.LOGING_COURIER_WITHOUT_DATA == r.text
 
-    @allure.step('Авторизация несуществующего курьера')
+    @allure.title('Авторизация несуществующего курьера')
     def test_auth_not_existing_courier(self):
         with allure.step('Отправка запроса на авторизацию несуществующего курьера'):
             r = requests.post(Endpoint.LOGIN_COURIER, data={

@@ -3,8 +3,9 @@ import requests
 from data import Endpoint, Message
 
 
+@allure.title('Тест: Получить список заказов')
 class TestListOrder:
-    @allure.step('Получить список заказов')
+    @allure.step('Отправить GET-запрос для получения списка заказов')
     def test_list_order(self):
         with allure.step('Отправить GET-запрос для получения списка заказов'):
             r = requests.get(Endpoint.ORDER_LIST)
@@ -14,3 +15,4 @@ class TestListOrder:
 
         with allure.step('Проверить наличие сообщения в ответе'):
             assert Message.LIST_ORDERS in r.text
+

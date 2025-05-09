@@ -4,9 +4,8 @@ import pytest
 
 from data import Endpoint, Message, User
 
-
 class TestCreateOrder:
-    @allure.step('Создать заказ с разными цветами самоката')
+    @allure.title('Создать заказ с разными цветами самоката')
     @pytest.mark.parametrize('color', [['BLACK'], ['GREY'], ['BLACK', 'GREY'], []])
     def test_create_order(self, color):
         payload = User.user
@@ -20,3 +19,4 @@ class TestCreateOrder:
 
         with allure.step('Проверка сообщения о создании заказа'):
             assert Message.CREATE_ORDER in r.text
+
